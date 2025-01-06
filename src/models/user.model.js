@@ -56,7 +56,7 @@ UserSchema.pre('save', async function (next) {
 
 UserSchema.methods.isPasswordCorrect = async function (password) {
   if (password) {
-    await bcrypt.compare(password, this.password); //method also provide the access of this.password and due to computation of ecryption algo we will use async await
+    return await bcrypt.compare(password, this.password); //method also provide the access of this.password and due to computation of ecryption algo we will use async await
   }
 };
 
@@ -64,7 +64,7 @@ UserSchema.methods.isPasswordCorrect = async function (password) {
 UserSchema.plugin(mongooseAggregatePaginate);
 
 //jwt is used as a bearer token means if api need data then api should have token to access the data
-UserSchema.generateAccessToken = function () {
+UserSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
       _id: this._id,
@@ -73,19 +73,19 @@ UserSchema.generateAccessToken = function () {
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: ACCESS_TOKEN_EXPIRY,
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
     }
   );
 };
 
-UserSchema.generateRefreshToken = function () {
+UserSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     {
-      expiresIn: REFRESH_TOKEN_EXPIRY,
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
     }
   );
 };

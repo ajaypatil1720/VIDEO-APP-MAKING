@@ -16,10 +16,10 @@ import { ApiResponse } from '../utils/ApiResponse.js';
 
 const generateAccessAndRefereshTokens = async (userId) => {
   const user = await User.findById(userId);
-  const accessToken = user.generateAccessToken();
+  const accessToken = await user.generateAccessToken();
   console.log('accessToken is:- ', accessToken);
 
-  const refreshToken = user.generateRefreshToken();
+  const refreshToken = await user.generateRefreshToken();
   console.log('accessToken && refreshToken is:- ', refreshToken);
   user.refreshToken = refreshToken;
   await user.save({ validateBeforeSave: false });
@@ -71,7 +71,7 @@ const registerUser = async (req, res) => {
     throw new ApiError(400, 'Avatar file is required new');
   }
 
-  const user = User.create({
+  const user = await User.create({
     fullName,
     avatar: avatar.url,
     coverImage: coverImage?.url || '',
@@ -104,14 +104,16 @@ const loginUser = async (req, res) => {
   //access and refresh token
   //send cookie
   const { email, username, password } = req.body;
+  console.log('login data', req.body);
 
   if (!username && !password) {
     throw new ApiError(400, 'username or password is invalid');
   }
 
-  const userData = User.findOne({
+  const userData = await User.findOne({
     $or: [{ username }, { password }],
   });
+  console.log('userdata', userData);
 
   if (!userData) {
     throw new ApiError(404, 'Invalid Credentials');

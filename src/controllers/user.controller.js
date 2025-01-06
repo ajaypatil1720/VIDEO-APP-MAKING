@@ -176,6 +176,8 @@ const logoutUser = async (req, res) => {
     .clearCookie('refreshToken', options)
     .json(new ApiResponse(200, {}, 'User LoggedOut'));
 };
-// const refreshAccessToken = async (req, res) => {};
+
+//now controller for refresh the token
+const refreshAccessToken = async (req, res) => {};
 
 export { registerUser, loginUser, logoutUser };

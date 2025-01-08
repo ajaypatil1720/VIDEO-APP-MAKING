@@ -1,5 +1,6 @@
 import { User } from '../models/user.model.js';
 import { ApiError } from '../utils/ApiError.js';
+import jwt from 'jsonwebtoken';
 
 const verifyJwt = async (req, _, next) => {
   const isAccessTokenValid =
@@ -9,7 +10,7 @@ const verifyJwt = async (req, _, next) => {
   if (!isAccessTokenValid) {
     throw new ApiError(404, 'Unauthorize Request');
   }
-  const verifyToken = jwt.verify(
+  const verifyToken = await jwt.verify(
     isAccessTokenValid,
     process.env.ACCESS_TOKEN_SECRET
   );

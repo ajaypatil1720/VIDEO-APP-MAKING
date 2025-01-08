@@ -1,26 +1,26 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
 const VideoSchema = mongoose.Schema(
   {
     videoFile: {
       type: String, //cloudinary url
-      required: true,
+      // required: true,
     },
     duration: {
       type: Number,
-      required: true,
+      // required: true,
     },
     content: {
       type: String,
     },
     title: {
       type: String,
-      required: true,
+      // required: true,
       lowercase: true,
     },
     thumbnail: {
       type: String, //cloudinary url
-      required: truess,
+      // required: true,
     },
     views: {
       type: Number,
@@ -28,7 +28,7 @@ const VideoSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      // required: true,
     },
     isPublished: {
       type: Boolean,
@@ -37,11 +37,11 @@ const VideoSchema = mongoose.Schema(
 
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   { timestamps: true }
 );
 
-const Video = mongoose.model("Video", VideoSchema);
+const Video = mongoose.model('Video', VideoSchema);
 export { Video };

@@ -1,47 +1,47 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Schema } from "mongoose";
 
 const VideoSchema = mongoose.Schema(
   {
     videoFile: {
-      type: String, //cloudinary url
+      type: String //cloudinary url
       // required: true,
     },
     duration: {
-      type: Number,
+      type: Number
       // required: true,
     },
     content: {
-      type: String,
+      type: String
     },
     title: {
       type: String,
       // required: true,
-      lowercase: true,
+      lowercase: true
     },
     thumbnail: {
-      type: String, //cloudinary url
+      type: String //cloudinary url
       // required: true,
     },
     views: {
       type: Number,
-      default: 0,
+      default: 0
     },
     description: {
-      type: String,
+      type: String
       // required: true,
     },
     isPublished: {
       type: Boolean,
-      default: true,
+      default: true
     },
 
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
+      ref: "User"
+    }
   },
   { timestamps: true }
 );
 
-const Video = mongoose.model('Video', VideoSchema);
+const Video = mongoose.model("Video", VideoSchema);
 export { Video };

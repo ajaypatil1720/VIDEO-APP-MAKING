@@ -1,23 +1,14 @@
-import { app } from './app.js';
-
-import connectDB from './db/index.js';
-
-import dotenv from 'dotenv';
-
+import dotenv from "dotenv";
 dotenv.config({
-  path: './env',
+  path: "./.env"
 });
+import { app } from "./app.js";
+import connectDB from "./db/index.js";
 
 connectDB()
   .then(() => {
-    app.listen(8000, () => {
-      console.log('Server is running at 8000');
+    app.listen(process.env.PORT, () => {
+      console.log("Server is running at", process.env.PORT);
     });
   })
-  .catch((err) => console.log('Mongo connection failed!!', err));
-
-app.get('/users', async (req, res) => {
-  res.send('Hello World134');
-});
-
-// app.use('/user', userRouter);
+  .catch((err) => console.log("Mongo connection failed!!", err));

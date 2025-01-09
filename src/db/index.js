@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    console.log("process.env.MOGODB_URL", process.env.MOGODB_URL);
     const dbConnection = await mongoose.connect(
-      `${process.env.MOGODB_URL}/videoTube`
+      `${process.env.MONGODB_URL}/friendsRepo`
     );
-    // console.log("dbConnectiondbConnection", dbConnection);
+    if (dbConnection) {
+      console.log("Successfully connected to db server!");
+    }
   } catch (err) {
     console.log("db error:=", err);
     process.exit(1); //this is provided by node js

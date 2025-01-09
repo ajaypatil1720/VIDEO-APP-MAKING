@@ -6,6 +6,7 @@ const app = express();
 // import { User } from './models/user.model.js';
 import userRouter from './routes/user.routes.js';
 import videoRouter from './routes/video.routes.js';
+import playlistRouter from './routes/playlist.route.js';
 
 app.use(
   cors({
@@ -45,5 +46,6 @@ console.log('hello');
 
 app.use('/app/v1', userRouter);
 app.use('/app/v1', videoRouter);
+app.use('/app/v1', playlistRouter);
 
 export { app };

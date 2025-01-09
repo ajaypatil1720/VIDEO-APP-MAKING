@@ -1,17 +1,17 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 // import { ApiError } from './utils/ApiError.js';
 const app = express();
 // import { User } from './models/user.model.js';
-import userRouter from './routes/user.routes.js';
-import videoRouter from './routes/video.routes.js';
-import playlistRouter from './routes/playlist.route.js';
+import userRouter from "./routes/user.routes.js";
+import videoRouter from "./routes/video.routes.js";
+import playlistRouter from "./routes/playlist.routes.js";
 
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN, //which sites or frontend or website are you allowing to request to backend.
-    credentials: true,
+    credentials: true
   })
 );
 
@@ -32,9 +32,9 @@ app.use(
 // createInitialUser();
 // User.create({ username: "abcd", email: "abc@gmail.com", password: "djashdjk" });
 
-app.use(express.json({ limit: '16kb' })); //how much json we will accept..this is limitation for json
-app.use(express.urlencoded({ extended: true, limit: '16kb' })); //when http request comes then some time data is in string form in request so we need to convert it into object to access the data thats why urlencoded is used
-app.use(express.static('public')); //when we get pdf or any file like image it will store in public folder.
+app.use(express.json({ limit: "16kb" })); //how much json we will accept..this is limitation for json
+app.use(express.urlencoded({ extended: true, limit: "16kb" })); //when http request comes then some time data is in string form in request so we need to convert it into object to access the data thats why urlencoded is used
+app.use(express.static("public")); //when we get pdf or any file like image it will store in public folder.
 app.use(cookieParser());
 
 //routing process
@@ -42,10 +42,9 @@ app.use(cookieParser());
 // app.listen(8000, () => {
 //   console.log('app is listening on 8000');
 // });
-console.log('hello');
 
-app.use('/app/v1', userRouter);
-app.use('/app/v1', videoRouter);
-app.use('/app/v1', playlistRouter);
+app.use("/api/v1/users/", userRouter);
+app.use("/api/v1/videos/", videoRouter);
+app.use("/api/v1/playlist/", playlistRouter);
 
 export { app };

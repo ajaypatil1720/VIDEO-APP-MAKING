@@ -16,7 +16,7 @@ export default [
       semi: ["error", "always"], // Enforce semicolons at the end of statements
       quotes: ["error", "double"], // Enforce double quotes for strings
       eqeqeq: "error", // Enforce strict equality (===)
-      "no-console": "off", // Allow console.log statements (disable this rule)
-    },
-  },
+      "no-console": "off" // Allow console.log statements (disable this rule)
+    }
+  }
 ];
